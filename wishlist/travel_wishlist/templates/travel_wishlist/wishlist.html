@@ -1,0 +1,32 @@
+{% extends 'travel_wishlist/base.html' %}
+
+{% block content %}
+
+<h2>Places To Visit</h2>
+
+<!-- Form to add a new place to the wishlist -->
+<form method="POST" action="{% url 'place_list' %}">
+    {% csrf_token %}  {# Protects the form against CSRF attacks #}
+    {{ new_place_form }}
+    <button id="add-new-place" type="submit">Add</button>
+</form>
+
+<!-- Loop over unvisited places and show each one with a "Visited!" button -->
+{% for place in places %}
+    <div class="wishlist-place">
+        <span class="place-name">{{ place.name }}</span>
+
+        <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
+            {% csrf_token %}
+            <button id="visited-button-{{ place.pk }}" type="submit">Visited!</button>
+        </form>
+    </div>
+
+{% empty %}
+
+    <!-- Message shown when there are no places yet -->
+    <p>You have no places in your wishlist</p>
+
+{% endfor %}
+
+{% endblock %}

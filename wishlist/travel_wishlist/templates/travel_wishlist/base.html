@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travel Wishlist</title>
+    <!-- Sakura CSS gives nice default styles -->
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
+    {% load static %}
+    <!-- Our own CSS file from the static folder -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+
+    <h1>Travel Wishlist</h1>
+
+    <!-- Simple navigation using named URLs defined in urls.py -->
+    <nav>
+        <a class="nav-link" href="{% url 'place_list' %}">Wishlist</a>
+        <a class="nav-link" href="{% url 'places_visited' %}">Visited</a>
+    </nav>
+
+    <!-- Child templates put their page content inside this block -->
+    {% block content %}
+    {% endblock %}
+
+    <p>An app to keep track of places to visit, and places visited.</p>
+
+</body>
+</html>
